@@ -1,4 +1,4 @@
-import { UserRole } from './models.types.js'
+import type { UserRole } from './models.types.js'
 
 declare global {
     namespace Express {
@@ -11,4 +11,4 @@ declare global {
     }
 }
 
-export {}
+export { }

@@ -18,6 +18,7 @@ export const env = {
     PORT: Number(getEnv('PORT', '5000')),
     NODE_ENV: getEnv('NODE_ENV', 'development'),
     CLIENT_ORIGIN: getEnv('CLIENT_ORIGIN', 'http://localhost:5173'),
+    JWT_SECRET:getEnv('JWT_SECRET'),
     MONGO_URI: getEnv('DATABASE_URL'),
     CLOUDINARY: {
         cloudName: getEnv('CLOUDINARY_CLOUD_NAME'),

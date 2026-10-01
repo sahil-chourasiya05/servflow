@@ -24,3 +24,13 @@ export interface IClient extends IUser {
         }
     }[]
 }
+export interface IProvider extends IUser {
+    role: 'provider'
+    category: string
+    travelFee: number
+    isOnline: boolean
+    location: {
+        type: 'Point'
+        coordinates: [number, number]
+    }
+}

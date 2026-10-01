@@ -14,3 +14,13 @@ export interface IUser extends Document {
     updatedAt: Date
     comparePassword(candidatePassword: string): Promise<boolean>
 }
+export interface IClient extends IUser {
+    role: 'client'
+    savedAddresses?: {
+        label: string
+        location: {
+            type: 'Point'
+            coordinates: [number, number]
+        }
+    }[]
+}

@@ -1,4 +1,3 @@
-// src/utils/jwt.ts
 import jwt, { SignOptions } from 'jsonwebtoken'
 import { env } from '@/config/env.js'
 import { UserRole } from '@/types/index.js'

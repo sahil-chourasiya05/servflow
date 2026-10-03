@@ -19,6 +19,12 @@ const clientSchema = new Schema<IClient>({
                 coordinates: {
                     type: [Number],
                     required: true,
+                    validate: {
+                        validator: function (v: number[]) {
+                            return v.length === 2;
+                        },
+                        message: 'Coordinates must contain exactly [longitude, latitude]'
+                    }
                 },
             },
         },

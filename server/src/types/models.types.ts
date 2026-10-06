@@ -1,6 +1,8 @@
 import { Document, Types } from 'mongoose'
 
 export type UserRole = 'client' | 'provider'
+export type RequestMode = 'direct' | 'broadcast'
+export type RequestStatus = 'open' | 'closed' | 'expired'
 
 export interface IUser extends Document {
     _id: Types.ObjectId
@@ -33,4 +35,20 @@ export interface IProvider extends IUser {
         type: 'Point'
         coordinates: [number, number]
     }
+}
+export interface IServiceRequest extends Document {
+    _id: Types.ObjectId
+    client: Types.ObjectId
+    category: string
+    description: string
+    photoUrl?: string
+    mode: RequestMode
+    targetProviders?: Types.ObjectId[]
+    location: {
+        type: 'Point'
+        coordinates: [number, number]
+    }
+    status: RequestStatus
+    createdAt: Date
+    updatedAt: Date
 }

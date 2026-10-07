@@ -4,6 +4,7 @@ import {env} from '@/config/env.js'
 import { errorMiddleware, notFoundHandler } from './middlewares/errorMiddleware.js'
 import cookieParser from 'cookie-parser'
 import authRoutes from '@/routes/authRoutes.js'
+import requestRoutes from '@/routes/requestRoutes.js'
 
 const app: Application = express()
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 app.use('/api/auth', authRoutes)
+app.use('/api/requests', requestRoutes)
 
 app.use(notFoundHandler)
 app.use(errorMiddleware)

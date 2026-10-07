@@ -1,7 +1,7 @@
 import { Response } from 'express'
 import { env } from '@/config/env.js'
 
-const COOKIE_NAME = 'token'
+export const COOKIE_NAME = 'token'
 const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000
 
 export const setAuthCookie = (res: Response, token: string): void => {

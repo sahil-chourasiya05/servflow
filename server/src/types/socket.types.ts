@@ -1,3 +1,4 @@
+import type { Server } from 'socket.io'
 import { SOCKET_EVENTS } from '@/socket/events.js'
 import { UserRole } from './models.types.js'
 
@@ -28,3 +29,10 @@ export interface SocketData {
         role: UserRole
     }
 }
+
+export type AppSocketServer = Server<
+    ClientToServerEvents,
+    ServerToClientEvents,
+    InterServerEvents,
+    SocketData
+>

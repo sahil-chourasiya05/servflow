@@ -2,6 +2,7 @@ import { ServiceRequest } from '@/models/ServiceRequest.js'
 import { findNearbyProviders } from '@/services/matchingService.js'
 import { ApiError } from '@/utils/ApiError.js'
 import { Types } from 'mongoose'
+import { emitNewRequest } from '@/socket/requestSocket.js'
 
 interface CreateRequestInput {
     clientId: string
@@ -57,6 +58,8 @@ export const createServiceRequest = async (input: CreateRequestInput) => {
             coordinates: [longitude, latitude],
         },
     })
+
+    emitNewRequest(request)
 
     return request
 }

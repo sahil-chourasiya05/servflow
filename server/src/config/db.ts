@@ -21,7 +21,7 @@ const connectDB = async (): Promise<void> => {
             autoIndex: NODE_ENV !== 'production',
         })
 
-        isConnected = !!conn.connections[0]?.readyState
+        isConnected = conn.connections[0]?.readyState === mongoose.ConnectionStates.connected
         console.log(`MongoDB Connected: ${conn.connection.host}`)
     } catch (error) {
         console.error('MongoDB connection failed:', error)

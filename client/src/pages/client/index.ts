@@ -1,0 +1,1 @@
+export { Home as ClientHome } from './home/Home'

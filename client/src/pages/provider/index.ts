@@ -1,0 +1,1 @@
+export { Home as ProviderHome } from './home/Home'

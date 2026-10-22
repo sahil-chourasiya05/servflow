@@ -1,7 +1,5 @@
-const App = () => {
-  return (
-    <div className='bg-red-500'>App</div>
-  )
-}
+import { AppRoutes } from '@/routes/AppRoutes'
 
-export default App
+export default function App() {
+  return <AppRoutes />
+}

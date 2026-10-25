@@ -142,3 +142,5 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
 test.ts
+test.tsx
+TestRenderer.tsx

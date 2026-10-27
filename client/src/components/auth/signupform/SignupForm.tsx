@@ -139,7 +139,7 @@ export function SignupForm() {
             ) : (
                 <>
                     <Select label='Service category' name='category' options={SERVICE_CATEGORIES} value={form.category} onChange={update('category')} error={errors.category} />
-                    <Input label='Travel fee (INR)' name='travelFee' type='number' min={0} value={form.travelFee} onChange={update('travelFee')} error={errors.travelFee} />
+                    <Input label='Minimum Travel Fee (₹)' name='travelFee' type='number' min={0} value={form.travelFee} onChange={update('travelFee')} error={errors.travelFee} />
                 </>
             )}
 

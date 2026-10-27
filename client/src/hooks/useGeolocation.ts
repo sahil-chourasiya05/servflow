@@ -26,8 +26,12 @@ export function useGeolocation() {
             (err) => {
                 setError(
                     err.code === err.PERMISSION_DENIED
-                        ? 'Location permission denied. Allow it in your browser settings.'
-                        : 'Could not detect your location'
+                        ? 'Please turn on device location and allow location access in your browser.'
+                        : err.code === err.POSITION_UNAVAILABLE
+                            ? 'Your location is unavailable. Please check your device location settings.'
+                            : err.code === err.TIMEOUT
+                                ? 'Location detection timed out. Please try again.'
+                                : 'Could not detect your location'
                 )
                 setIsLoading(false)
             },

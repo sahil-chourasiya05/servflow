@@ -1,10 +1,11 @@
 import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
-import {env} from '@/config/env.js' 
+import { env } from '@/config/env.js'
 import { errorMiddleware, notFoundHandler } from './middlewares/errorMiddleware.js'
 import cookieParser from 'cookie-parser'
 import authRoutes from '@/routes/authRoutes.js'
 import requestRoutes from '@/routes/requestRoutes.js'
+import providerRoutes from '@/routes/providerRoutes.js'
 
 const app: Application = express()
 
@@ -19,6 +20,7 @@ app.use(cookieParser())
 
 app.use('/api/auth', authRoutes)
 app.use('/api/requests', requestRoutes)
+app.use('/api/providers', providerRoutes)
 
 app.use(notFoundHandler)
 app.use(errorMiddleware)

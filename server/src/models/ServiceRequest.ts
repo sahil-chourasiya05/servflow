@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose'
 import { IServiceRequest } from '@/types/index.js'
+import { SERVICE_CATEGORIES } from '@/constants/categories.js'
 
 const serviceRequestSchema = new Schema<IServiceRequest>(
     {
@@ -11,6 +12,10 @@ const serviceRequestSchema = new Schema<IServiceRequest>(
         category: {
             type: String,
             required: [true, 'Category is required'],
+            enum: {
+                values: SERVICE_CATEGORIES,
+                message: '{VALUE} is not a valid category',
+            },
             trim: true,
         },
         description: {

@@ -1,11 +1,16 @@
 import { Schema } from 'mongoose'
 import { User } from './User.js'
 import { IProvider } from '@/types/index.js'
+import { SERVICE_CATEGORIES } from '@/constants/categories.js'
 
 const providerSchema = new Schema<IProvider>({
     category: {
         type: String,
         required: [true, 'Category is required'],
+        enum: {
+            values: SERVICE_CATEGORIES,
+            message: '{VALUE} is not a valid category',
+        },
         trim: true,
     },
     travelFee: {

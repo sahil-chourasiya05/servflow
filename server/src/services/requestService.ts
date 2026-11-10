@@ -64,7 +64,7 @@ const resolveBroadcastProviders = async (input: {
         throw ApiError.notFound('No providers found nearby for this category')
     }
 
-    return nearby.map((item) => item.provider._id as Types.ObjectId)
+    return nearby.map((item) => new Types.ObjectId(item.id))
 }
 
 export const createServiceRequest = async (input: CreateRequestInput) => {

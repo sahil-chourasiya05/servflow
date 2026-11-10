@@ -1,7 +1,7 @@
-import { isServiceCategory } from '@/constants/categories.js'
+import { isServiceCategory, type ServiceCategory } from '@/constants/categories.js'
 import { ApiError } from '@/utils/ApiError.js'
 
-export const assertValidCategory = (category: unknown): void => {
+export function assertValidCategory(category: unknown): asserts category is ServiceCategory {
     if (!isServiceCategory(category)) {
         throw ApiError.badRequest('Invalid category')
     }

@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { PrivateRoute, ClientRoute, ProviderRoute, PublicRoute } from '@/routes'
 import { AuthLayout, ProviderLayout, ClientLayout } from '@/layouts'
 import { Login, Signup } from '@/pages/auth'
-import { ClientHome } from '@/pages/client'
+import { ClientHome, CreateRequest } from '@/pages/client'
 import { ProviderHome } from '@/pages/provider'
 import { NotFound } from '@/pages/notfound/NotFound'
 
@@ -22,6 +22,7 @@ export function AppRoutes() {
                 <Route element={<ClientRoute />}>
                     <Route path='/client' element={<ClientLayout />}>
                         <Route index element={<ClientHome />} />
+                        <Route path='create-request' element={<CreateRequest />} />
                     </Route>
                 </Route>
 

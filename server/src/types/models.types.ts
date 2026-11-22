@@ -1,3 +1,4 @@
+import type { BidStatus } from '@/constants/bid.js'
 import { Document, Types } from 'mongoose'
 
 export type UserRole = 'client' | 'provider'
@@ -49,6 +50,17 @@ export interface IServiceRequest extends Document {
         coordinates: [number, number]
     }
     status: RequestStatus
+    createdAt: Date
+    updatedAt: Date
+}
+export interface IBid extends Document {
+    _id: Types.ObjectId
+    request: Types.ObjectId
+    provider: Types.ObjectId
+    price: number
+    etaMinutes: number
+    note?: string
+    status: BidStatus
     createdAt: Date
     updatedAt: Date
 }

@@ -9,6 +9,7 @@ import {
     assertValidCoordinates,
     assertValidRadius,
 } from '@/utils/validators.js'
+import { Bid } from '@/models/Bid.js'
 
 const MIN_DESCRIPTION_LENGTH = 10
 
@@ -110,4 +111,40 @@ export const createServiceRequest = async (input: CreateRequestInput) => {
     emitNewRequest(request)
 
     return request
+}
+
+export const getIncomingRequests = async (providerId: string) => {
+    const requests = await ServiceRequest.find({ targetProviders: providerId, status: 'open' })
+        .select('category description photoUrl mode location createdAt')
+        .sort({ createdAt: -1 })
+        .limit(50)
+
+    const bids = await Bid.find({
+        provider: providerId,
+        request: { $in: requests.map((request) => request._id) },
+    }).select('request price etaMinutes status')
+
+    const bidByRequest = new Map(bids.map((bid) => [bid.request.toString(), bid]))
+
+    return requests.map((request) => {
+        const bid = bidByRequest.get(request._id.toString())
+
+        return {
+            requestId: request._id.toString(),
+            category: request.category,
+            description: request.description,
+            photoUrl: request.photoUrl,
+            mode: request.mode,
+            location: request.location,
+            createdAt: request.createdAt,
+            myBid: bid
+                ? {
+                      id: bid._id.toString(),
+                      price: bid.price,
+                      etaMinutes: bid.etaMinutes,
+                      status: bid.status,
+                  }
+                : null,
+        }
+    })
 }

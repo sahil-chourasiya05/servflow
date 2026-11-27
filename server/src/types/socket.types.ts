@@ -17,6 +17,9 @@ export interface NewRequestPayload {
 
 export interface ServerToClientEvents {
     [SOCKET_EVENTS.NEW_REQUEST]: (payload: NewRequestPayload) => void
+    [SOCKET_EVENTS.NEW_BID]: (payload: BidEventPayload) => void
+    [SOCKET_EVENTS.BID_ACCEPTED]: (payload: BidEventPayload) => void
+    [SOCKET_EVENTS.BID_REJECTED]: (payload: BidRejectedPayload) => void
 }
 
 export interface ClientToServerEvents { }
@@ -36,3 +39,12 @@ export type AppSocketServer = Server<
     InterServerEvents,
     SocketData
 >
+
+export interface BidEventPayload {
+    requestId: string
+    bidId: string
+}
+
+export interface BidRejectedPayload {
+    requestId: string
+}

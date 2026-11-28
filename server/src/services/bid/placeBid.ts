@@ -2,6 +2,7 @@ import { Types } from 'mongoose'
 import { Bid } from '@/models/Bid.js'
 import { ServiceRequest } from '@/models/ServiceRequest.js'
 import { ApiError } from '@/utils/ApiError.js'
+import { emitNewBid } from '@/socket/bidSocket.js'
 
 interface PlaceBidInput {
     requestId: string
@@ -30,5 +31,9 @@ export const placeBid = async ({ requestId, providerId, price, etaMinutes, note 
         throw ApiError.conflict('You have already placed a bid on this request')
     }
 
-    return Bid.create({ request: requestId, provider: providerId, price, etaMinutes, note })
+    const bid = await Bid.create({ request: requestId, provider: providerId, price, etaMinutes, note })
+
+    emitNewBid(request.client.toString(), requestId, bid._id.toString())
+
+    return bid
 }

@@ -3,6 +3,7 @@ import { Bid } from '@/models/Bid.js'
 import { ServiceRequest } from '@/models/ServiceRequest.js'
 import { ApiError } from '@/utils/ApiError.js'
 import type { IBid } from '@/types/index.js'
+import { emitBidAccepted, emitBidRejected } from '@/socket/bidSocket.js'
 
 interface AcceptBidResult {
     bid: IBid
@@ -64,6 +65,8 @@ export const acceptBid = async (bidId: string, clientId: string): Promise<Accept
         })
 
         if (!result) throw ApiError.internal('Could not accept the bid')
+        emitBidAccepted(result.bid.provider.toString(), request._id.toString(), result.bid._id.toString())
+        emitBidRejected(result.rejectedProviderIds, request._id.toString())
         return result
     } finally {
         await session.endSession()
